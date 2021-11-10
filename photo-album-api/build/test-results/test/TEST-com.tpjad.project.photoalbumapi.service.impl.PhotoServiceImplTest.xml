@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-11-10T11:15:06" hostname="302c626e75ed" time="0.109">
+  <properties/>
+  <testcase name="whenPhotoDeleteAndPhotoDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.004"/>
+  <testcase name="whenDeleteFromAlbumAndAlbumOrPhotoDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.006"/>
+  <testcase name="whenPhotoDeleteAndPhotoExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.004"/>
+  <testcase name="whenCreatePhotoAndAlbumExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.044"/>
+  <testcase name="whenUpdatePhotoAndPhotoExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.003"/>
+  <testcase name="whenFindAllFromAlbumAndAlbumExists_thenReturnPhotos()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.019"/>
+  <testcase name="whenCreatePhotoAndAlbumDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.003"/>
+  <testcase name="whenDeleteFromAlbumAndAlbumExistsAndPhotoExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.012"/>
+  <testcase name="whenFindAllFromAlbumAndAlbumDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.002"/>
+  <testcase name="whenUpdatePhotoAndPhotoDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.PhotoServiceImplTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

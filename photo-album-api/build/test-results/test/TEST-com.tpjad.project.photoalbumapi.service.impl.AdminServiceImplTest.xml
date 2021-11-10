@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-11-10T11:14:58" hostname="302c626e75ed" time="7.666">
+  <properties/>
+  <testcase name="whenCreateUserAndRolesExistsAndUserDoesNotExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="7.586"/>
+  <testcase name="whenDeleteAccountAndUserDoesNotExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="0.026"/>
+  <testcase name="whenCreateAdminAndRolesExistsAndUserDoesNotExists_thenReturnNothing()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="0.008"/>
+  <testcase name="whenCreateAdminAndRolesNotFound_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="0.005"/>
+  <testcase name="whenCreateAdminAndRolesExistsAndUserAlreadyExists_thenExceptionIsThrown()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="0.007"/>
+  <testcase name="whenDeleteAccountAndUserExists_thenAllDependentEntitiesWillBeRemoved()" classname="com.tpjad.project.photoalbumapi.service.impl.AdminServiceImplTest" time="0.029"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

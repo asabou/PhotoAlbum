@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BootStrapData.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">photo-album-api</a> &gt; <a href="index.source.html" class="el_package">com.tpjad.project.photoalbumapi.service.impl</a> &gt; <span class="el_source">BootStrapData.java</span></div><h1>BootStrapData.java</h1><pre class="source lang-java linenums">package com.tpjad.project.photoalbumapi.service.impl;
+
+import com.tpjad.project.photoalbumapi.dao.entity.RoleEntity;
+import com.tpjad.project.photoalbumapi.dao.entity.UserEntity;
+import com.tpjad.project.photoalbumapi.dao.repository.IAlbumRepository;
+import com.tpjad.project.photoalbumapi.dao.repository.IRoleRepository;
+import com.tpjad.project.photoalbumapi.dao.repository.IUserRepository;
+import com.tpjad.project.photoalbumapi.service.abstracts.IAdminService;
+import com.tpjad.project.photoalbumapi.service.abstracts.IAlbumService;
+import com.tpjad.project.photoalbumapi.service.abstracts.IPhotoService;
+import com.tpjad.project.photoalbumapi.service.model.Album;
+import com.tpjad.project.photoalbumapi.service.model.Photo;
+import com.tpjad.project.photoalbumapi.service.model.User;
+import com.tpjad.project.photoalbumapi.service.model.UserDetails;
+import com.tpjad.project.photoalbumapi.utils.Base64Utils;
+import com.tpjad.project.photoalbumapi.utils.DateUtils;
+import com.tpjad.project.photoalbumapi.utils.ImageBytesUtils;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+@Component
+public class BootStrapData implements CommandLineRunner {
+    private final IRoleRepository roleRepository;
+    private final IAdminService adminService;
+    private final IUserRepository userRepository;
+    private final IAlbumService albumService;
+    private final IPhotoService photoService;
+
+    public BootStrapData(IRoleRepository roleRepository,
+                         IAdminService adminService,
+                         IUserRepository userRepository,
+<span class="nc" id="L32">                         IAlbumService albumService, IPhotoService photoService) {</span>
+<span class="nc" id="L33">        this.roleRepository = roleRepository;</span>
+<span class="nc" id="L34">        this.adminService = adminService;</span>
+<span class="nc" id="L35">        this.userRepository = userRepository;</span>
+<span class="nc" id="L36">        this.albumService = albumService;</span>
+<span class="nc" id="L37">        this.photoService = photoService;</span>
+<span class="nc" id="L38">    }</span>
+
+    @Override
+    public void run(String... args) throws Exception {
+<span class="nc" id="L42">        saveRoles();</span>
+<span class="nc" id="L43">        saveAdminAlex();</span>
+<span class="nc" id="L44">        saveUserIulia();</span>
+<span class="nc" id="L45">        save2AlbumsForIulia();</span>
+<span class="nc" id="L46">        save3PhotosForIulia();</span>
+<span class="nc" id="L47">    }</span>
+
+    private void saveRoles() {
+<span class="nc" id="L50">        RoleEntity admin = new RoleEntity(), user = new RoleEntity();</span>
+<span class="nc" id="L51">        admin.setRole(&quot;ADMIN&quot;);</span>
+<span class="nc" id="L52">        user.setRole(&quot;USER&quot;);</span>
+<span class="nc" id="L53">        roleRepository.save(admin);</span>
+<span class="nc" id="L54">        roleRepository.save(user);</span>
+<span class="nc" id="L55">    }</span>
+
+    private void saveAdminAlex() {
+<span class="nc" id="L58">        User user = new User();</span>
+<span class="nc" id="L59">        UserDetails userDetails = new UserDetails();</span>
+
+<span class="nc" id="L61">        user.setUsername(&quot;alex&quot;);</span>
+<span class="nc" id="L62">        user.setPassword(Base64Utils.encode(&quot;password&quot;));</span>
+
+<span class="nc" id="L64">        userDetails.setFirstName(&quot;Alex&quot;);</span>
+<span class="nc" id="L65">        userDetails.setLastName(&quot;Sabou&quot;);</span>
+<span class="nc" id="L66">        userDetails.setUser(user);</span>
+<span class="nc" id="L67">        adminService.createAdmin(userDetails);</span>
+<span class="nc" id="L68">    }</span>
+
+    private void saveUserIulia() {
+<span class="nc" id="L71">        User user = new User();</span>
+<span class="nc" id="L72">        UserDetails userDetails = new UserDetails();</span>
+
+<span class="nc" id="L74">        user.setUsername(&quot;iulia&quot;);</span>
+<span class="nc" id="L75">        user.setPassword(Base64Utils.encode(&quot;password&quot;));</span>
+
+<span class="nc" id="L77">        userDetails.setFirstName(&quot;Iulia&quot;);</span>
+<span class="nc" id="L78">        userDetails.setLastName(&quot;Sabou&quot;);</span>
+<span class="nc" id="L79">        userDetails.setUser(user);</span>
+
+<span class="nc" id="L81">        adminService.createUser(userDetails);</span>
+<span class="nc" id="L82">    }</span>
+
+    private void save2AlbumsForIulia() {
+<span class="nc" id="L85">        UserEntity userEntity = userRepository.findUserByUsername(&quot;iulia&quot;);</span>
+<span class="nc" id="L86">        Album album1 = new Album(), album2 = new Album();</span>
+<span class="nc" id="L87">        album1.setTitle(&quot;Stadion1&quot;);</span>
+<span class="nc" id="L88">        album2.setTitle(&quot;Stadion2&quot;);</span>
+<span class="nc" id="L89">        albumService.create(album1, userEntity.getId());</span>
+<span class="nc" id="L90">        albumService.create(album2, userEntity.getId());</span>
+<span class="nc" id="L91">    }</span>
+
+    private void save3PhotosForIulia() {
+<span class="nc" id="L94">        UserEntity userEntity = userRepository.findUserByUsername(&quot;iulia&quot;);</span>
+<span class="nc" id="L95">        Photo photo1 = new Photo(), photo2 = new Photo(), photo3 = new Photo();</span>
+<span class="nc" id="L96">        photo1.setDate(DateUtils.getCurrentDate());</span>
+<span class="nc" id="L97">        photo1.setTitle(&quot;Cel mai tare stadion&quot;);</span>
+<span class="nc" id="L98">        photo1.setAlbumId(1l);</span>
+<span class="nc" id="L99">        photo1.setImage(new ImageBytesUtils(&quot;images/entplace1.jpg&quot;).extractBytes());</span>
+
+<span class="nc" id="L101">        photo2.setDate(DateUtils.getCurrentDate());</span>
+<span class="nc" id="L102">        photo2.setTitle(&quot;Cel mai tare stadion2&quot;);</span>
+<span class="nc" id="L103">        photo2.setAlbumId(1l);</span>
+<span class="nc" id="L104">        photo2.setImage(new ImageBytesUtils(&quot;images/entplace2.jpg&quot;).extractBytes());</span>
+
+<span class="nc" id="L106">        photo3.setDate(DateUtils.getCurrentDate());</span>
+<span class="nc" id="L107">        photo3.setTitle(&quot;Cel mai tare stadion3&quot;);</span>
+<span class="nc" id="L108">        photo3.setAlbumId(2l);</span>
+<span class="nc" id="L109">        photo3.setImage(new ImageBytesUtils(&quot;images/entplace3.jpg&quot;).extractBytes());</span>
+
+<span class="nc" id="L111">        photoService.create(photo1);</span>
+<span class="nc" id="L112">        photoService.create(photo2);</span>
+<span class="nc" id="L113">        photoService.create(photo3);</span>
+<span class="nc" id="L114">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
