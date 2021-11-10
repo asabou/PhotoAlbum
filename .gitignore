@@ -15,6 +15,10 @@ bin-release/
 
 photo-album-web/dist
 photo-album-web/node_modules
+photo-album-web/.angular
+photo-album-api/build
+photo-album-api/.idea
+photo-album-api/.gradle
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
