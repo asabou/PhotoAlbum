@@ -1,26 +1,27 @@
 version: '3'
 
 services:
-  gradle:
-    image: gradle:6.9.1-jdk11
-    container_name: gradle6.9.1
-    volumes: 
-      - ../photo-album-api:/photo-album/api
-      - ./gradle_clean_build.sh:/photo-album/gradle_clean_build.sh
-    command: sh /photo-album/gradle_clean_build.sh
+  # gradle:
+  #   image: gradle:6.9.1-jdk11
+  #   container_name: gradle6.9.1
+  #   volumes: 
+  #     - ../photo-album-api:/photo-album/api
+  #     - ./gradle_clean_build.sh:/photo-album/gradle_clean_build.sh
+  #   command: sh /photo-album/gradle_clean_build.sh
 
   node:
     image: node:lts
     container_name: node
     environment:
       DEPENDENCY: ${DEPENDENCY}
+      COMPONENT: ${COMPONENT}
       ACTION: ${ACTION}
     volumes: 
       - ../photo-album-web:/photo-album/photo-album-web
       - ./ng_prepare_build.sh:/photo-album/ng_prepare_build.sh
     command: sh /photo-album/ng_prepare_build.sh ${ACTION}
-    depends_on:
-      - gradle
+    # depends_on:
+    #   - gradle
 
 volumes:
   photoAlbumVolumes:
