@@ -4,10 +4,12 @@ services:
   photo-album-api:
     image: openjdk:15
     container_name: photo-album-api
+    environment: 
+      ROOT: ${ROOT}
     ports: 
       - 8080:8080
     volumes:
-      - ../photo-album-api/build/libs/photo-album-api-1.0.jar:/photo-album/application.jar
+      - $ROOT/photo-album-api/build/libs/photo-album-api-1.0.jar:/photo-album/application.jar
     command: ["java", "-jar", "/photo-album/application.jar"]
     networks:
       - backendNetwork
@@ -16,24 +18,28 @@ services:
   photo-album-web:
     image: nginx
     container_name: photo-album-web
+    environment: 
+      ROOT: ${ROOT}
     ports:
       - 80:80
     depends_on:
       - photo-album-api
     volumes:
-      - ../docker/photo-album.nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../photo-album-web/dist/photo-album-web:/usr/share/nginx/html
+      - $ROOT/docker/photo-album.nginx.conf:/etc/nginx/conf.d/default.conf
+      - $ROOT/photo-album-web/dist/photo-album-web:/usr/share/nginx/html
     networks:
       - frontendNetwork
   
   photo-album-angular:
     image: node:lts
     container_name: photo-album-angular
+    environment: 
+      ROOT: ${ROOT}
     ports:
       - 4200:4200
     volumes:
-      - ../photo-album-web:/photo-album/photo-album-web
-      - ./ng_prepare_serve.sh:/photo-album/ng_prepare_serve.sh
+      - $ROOT/photo-album-web:/photo-album/photo-album-web
+      - $ROOT/docker/ng_prepare_serve.sh:/photo-album/ng_prepare_serve.sh
     command: sh /photo-album/ng_prepare_serve.sh
     depends_on:
       - photo-album-api

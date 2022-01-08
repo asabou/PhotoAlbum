@@ -4,9 +4,11 @@ services:
   # gradle:
   #   image: gradle:6.9.1-jdk11
   #   container_name: gradle6.9.1
+  #   environment: 
+  #     ROOT: ${ROOT}
   #   volumes: 
-  #     - ../photo-album-api:/photo-album/api
-  #     - ./gradle_clean_build.sh:/photo-album/gradle_clean_build.sh
+  #     - $ROOT/photo-album-api:/photo-album/api
+  #     - $ROOT/docker/gradle_clean_build.sh:/photo-album/gradle_clean_build.sh
   #   command: sh /photo-album/gradle_clean_build.sh
 
   node:
@@ -16,9 +18,10 @@ services:
       DEPENDENCY: ${DEPENDENCY}
       COMPONENT: ${COMPONENT}
       ACTION: ${ACTION}
+      ROOT: ${ROOT}
     volumes: 
-      - ../photo-album-web:/photo-album/photo-album-web
-      - ./ng_prepare_build.sh:/photo-album/ng_prepare_build.sh
+      - $ROOT/photo-album-web:/photo-album/photo-album-web
+      - $ROOT/docker/ng_prepare_build.sh:/photo-album/ng_prepare_build.sh
     command: sh /photo-album/ng_prepare_build.sh ${ACTION}
     # depends_on:
     #   - gradle

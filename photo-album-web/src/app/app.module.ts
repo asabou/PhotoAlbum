@@ -12,6 +12,10 @@ import { PhotoDetailsComponent } from './photo/photo-details/photo-details.compo
 import { UserAddComponent } from './admin/user-add/user-add.component';
 import { UserDetailsComponent } from './admin/user-details/user-details.component';
 import { AbstractTableComponent } from './commons/abstract-table/abstract-table.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/shared/login.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpTokenInterceptor } from './interceptors/http-token-interceptor';
 
 @NgModule({
   declarations: [
@@ -25,12 +29,15 @@ import { AbstractTableComponent } from './commons/abstract-table/abstract-table.
     PhotoDetailsComponent,
     UserAddComponent,
     UserDetailsComponent,
-    AbstractTableComponent
+    AbstractTableComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
