@@ -10,14 +10,14 @@
 #install all dependencies
 #export ACTION=all_dep
 
-#action comp
-export ACTION=comp
+#action
+export ACTION=dep
 
 #name of the component
-export COMPONENT=login
+#export COMPONENT=login
 
 #name of dependency
-#export DEPENDENCY=@angular/common
+export DEPENDENCY=@angular/material
 
 export ROOT=/mnt/c/Users/alexandru.sabou/Desktop/PhotoAlbum
 docker-compose -f ./docker/docker-compose.build.yml up --remove-orphans

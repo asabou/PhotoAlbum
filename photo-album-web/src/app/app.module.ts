@@ -13,9 +13,25 @@ import { UserAddComponent } from './admin/user-add/user-add.component';
 import { UserDetailsComponent } from './admin/user-details/user-details.component';
 import { AbstractTableComponent } from './commons/abstract-table/abstract-table.component';
 import { LoginComponent } from './login/login.component';
+import { SessionObjectService } from './login/shared/session-object.service';
 import { LoginService } from './login/shared/login.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpTokenInterceptor } from './interceptors/http-token-interceptor';
+import { AdminGuard } from './guards/admin.guard';
+import { UserGuard } from './guards/user.guard';
+import { ImageBytesService } from './utils/image-bytes.service';
+import { AdminService } from './admin/shared/admin.service';
+import { PhotoService } from './photo/shared/photo.service';
+import { AlbumService } from './album/shared/album.service';
+import { UserService } from './admin/shared/user.service';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,13 +46,32 @@ import { HttpTokenInterceptor } from './interceptors/http-token-interceptor';
     UserAddComponent,
     UserDetailsComponent,
     AbstractTableComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    LayoutModule,
+    ToastrModule.forRoot()
   ],
   providers: [
-    LoginService
+    SessionObjectService,
+    LoginService,
+    AdminService,
+    AlbumService,
+    PhotoService,
+    UserService,
+    ImageBytesService,
+    AdminGuard,
+    UserGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
